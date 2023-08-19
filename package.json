@@ -1,0 +1,25 @@
+{
+  "name": "owl-syntax-highlight",
+  "displayName": "owl-syntax-highlight",
+  "description": "",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.81.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "owl",
+      "aliases": ["Owl", "owl"],
+      "extensions": [".hoot"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "owl",
+      "scopeName": "source.owl",
+      "path": "./syntaxes/owl.tmLanguage.json"
+    }]
+  }
+}

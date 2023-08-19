@@ -1,0 +1,343 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Owl",
+	"scopeName": "source.owl",
+	"patterns": [
+		{
+			"match": "\\s+//",
+			"name": "punctuation.definition.comment.owl"
+		},
+		{
+			"match": "\\b([0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?)",
+			"name": "constant.numeric.owl"
+		},
+		{
+			"match": "\\b(import)\\b",
+			"name": "keyword.control.import.owl"
+		},
+		{
+			"name": "keyword.control.owl",
+			"match": "\\b(break|continue|return)\\b"
+		},
+		{
+			"name": "keyword.control.owl",
+			"match": "\\b(if|else|for|in|while)\\b"
+		},
+		{
+			"match": "\\b(and|has|not|or)\\b",
+			"name": "keyword.operator.logical.owl"
+		},
+		{
+			"match": "=>",
+			"name": "storage.type.function.owl"
+		},
+		{
+			"match": "<\\=|>\\=|\\=\\=|<|>|\\!\\=",
+			"name": "keyword.operator.comparison.owl"
+		},
+		{
+			"match": "(\\+\\+|--|-|\\+|\\*|/|\\*\\*|%)=",
+			"name": "keyword.operator.arithmetic.owl"
+		},
+		{
+			"match": "([+-/*&|]|)=",
+			"name": "keyword.operator.assignment.owl"
+		},
+		{
+			"match": "\\b(print)\\b",
+			"name": "keyword.other.owl"
+		},
+		{
+			"name": "meta.block.owl",
+			"begin": "(?<=\\)|=>)\\s+(\\{)",
+			"beginCaptures": {
+				"1": {
+					"name": "punctuation.section.block.begin.owl"
+				}
+			},
+			"end": "(\\})",
+			"endCaptures": {
+				"1": {
+					"name": "punctuation.section.block.end.owl"
+				}
+			},
+			"patterns": [
+				{
+					"include": "$self"
+				}
+			]
+		},
+		{
+			"begin": "(\\()",
+			"beginCaptures": {
+				"1": {
+					"name": "punctuation.definition.parameters.begin.owl"
+				}
+			},
+			"end": "(\\))",
+			"endCaptures": {
+				"1": {
+					"name": "punctuation.definition.parameters.end.owl"
+				}
+			},
+			"name": "meta.function.parameters.owl",
+			"patterns": [
+				{
+					"include": "$self"
+				}
+			]
+		},
+		{
+			"match": "\\b(null|true|false)\\b",
+			"name": "constant.language.owl"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"begin": "(\\()",
+			"end": "(\\))",
+			"patterns": [
+				{
+					"include": "$self"
+				}
+			]
+		},
+		{
+			"name": "meta.ternary.condition.owl",
+			"begin": "(\\?)",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control.flow.owl"
+				}
+			},
+			"end": "(\\:)",
+			"endCaptures": {
+				"1": {
+					"name": "keyword.control.flow.owl"
+				}
+			},
+			"patterns": [
+				{
+					"include": "$self"
+				}
+			]
+		},
+		{
+			"begin": "(\\[)",
+			"beginCaptures": {
+				"1": {
+					"name": "punctuation.definition.list.begin.owl"
+				}
+			},
+			"end": "(\\])",
+			"endCaptures": {
+				"1": {
+					"name": "punctuation.definition.list.end.owl"
+				}
+			},
+			"name": "meta.structure.list.owl",
+			"patterns": [
+				{
+					"begin": "(?<=\\[|\\,)\\s*(?![\\],])",
+					"contentName": "meta.structure.list.item.owl",
+					"end": "\\s*(?:(,)|(?=\\]))",
+					"endCaptures": {
+						"1": {
+							"name": "punctuation.separator.list.owl"
+						}
+					},
+					"patterns": [
+						{
+							"include": "$self"
+						}
+					]
+				}
+			]
+		},
+		{
+			"begin": "(\\{)",
+			"beginCaptures": {
+				"1": {
+					"name": "punctuation.definition.dictionary.begin.owl"
+				}
+			},
+			"end": "(\\})",
+			"endCaptures": {
+				"1": {
+					"name": "punctuation.definition.dictionary.end.owl"
+				}
+			},
+			"name": "meta.structure.dictionary.owl",
+			"patterns": [
+				{
+					"begin": "(?<=\\{|\\,|^)\\s*(?![\\},])",
+					"contentName": "meta.structure.dictionary.key.owl",
+					"end": "\\s*(?:(?=\\})|(\\:))",
+					"endCaptures": {
+						"1": {
+							"name": "punctuation.separator.valuepair.dictionary.owl"
+						}
+					},
+					"patterns": [
+						{
+							"include": "$self"
+						}
+					]
+				},
+				{
+					"begin": "(?<=\\:|^)\\s*",
+					"contentName": "meta.structure.dictionary.value.owl",
+					"end": "\\s*(?:(?=\\})|(,))",
+					"endCaptures": {
+						"1": {
+							"name": "punctuation.separator.dictionary.owl"
+						}
+					},
+					"patterns": [
+						{
+							"include": "$self"
+						}
+					]
+				}
+			]
+		},
+		{
+			"match": "(\\.)([A-Za-z_][A-Za-z0-9_]*)",
+			"name": "meta.attribute.owl"
+		},
+		{
+			"name": "entity.name.variable.owl",
+			"match": "\\b([A-Za-z_][A-Za-z0-9_]*)\\b"
+		}
+	],
+	"repository": {
+		"constant_placeholder": {
+			"match": "(?i:(%(\\([a-z_]+\\))?#?0?\\-?[ ]?\\+?([0-9]*|\\*)(\\.([0-9]*|\\*))?([hL][a-z]|[a-z%]))|(\\{([!\\[\\].:\\w ]+)?\\}))",
+			"name": "constant.other.placeholder.owl"
+		},
+		"escaped_char": {
+			"captures": {
+				"1": {
+					"name": "constant.character.escape.hex.owl"
+				},
+				"2": {
+					"name": "constant.character.escape.octal.owl"
+				},
+				"3": {
+					"name": "constant.character.escape.newline.owl"
+				},
+				"4": {
+					"name": "constant.character.escape.backlash.owl"
+				},
+				"5": {
+					"name": "constant.character.escape.double-quote.owl"
+				},
+				"6": {
+					"name": "constant.character.escape.single-quote.owl"
+				},
+				"7": {
+					"name": "constant.character.escape.bell.owl"
+				},
+				"8": {
+					"name": "constant.character.escape.backspace.owl"
+				},
+				"9": {
+					"name": "constant.character.escape.formfeed.owl"
+				},
+				"10": {
+					"name": "constant.character.escape.linefeed.owl"
+				},
+				"11": {
+					"name": "constant.character.escape.return.owl"
+				},
+				"12": {
+					"name": "constant.character.escape.tab.owl"
+				},
+				"13": {
+					"name": "constant.character.escape.vertical-tab.owl"
+				}
+			},
+			"match": "(\\\\x[0-9A-F]{2})|(\\\\[0-7]{3})|(\\\\\\n)|(\\\\\\\\)|(\\\\\\\")|(\\\\')|(\\\\a)|(\\\\b)|(\\\\f)|(\\\\n)|(\\\\r)|(\\\\t)|(\\\\v)"
+		},
+		"generic_names": {
+			"match": "[A-Za-z_][A-Za-z0-9_]*"
+		},
+		"illegal_names": {
+			"match": "\\b(if|else|for|in|has|return|let|while|continue|break|import|print|null|and|or|not|true|false)\\b",
+			"name": "invalid.illegal.name.owl"
+		},
+		"string_quoted_double": {
+			"patterns": [
+				{
+					"begin": "(\")",
+					"beginCaptures": {
+						"1": {
+							"name": "punctuation.definition.string.begin.owl"
+						}
+					},
+					"comment": "double quoted string",
+					"end": "(\")|(\\n)",
+					"endCaptures": {
+						"1": {
+							"name": "punctuation.definition.string.end.owl"
+						},
+						"2": {
+							"name": "invalid.illegal.unclosed-string.owl"
+						}
+					},
+					"name": "string.quoted.double.single-line.owl",
+					"patterns": [
+						{
+							"include": "#constant_placeholder"
+						},
+						{
+							"include": "#escaped_char"
+						}
+					]
+				}
+			]
+		},
+		"string_quoted_single": {
+			"patterns": [
+				{
+					"begin": "(')",
+					"beginCaptures": {
+						"1": {
+							"name": "punctuation.definition.string.begin.owl"
+						}
+					},
+					"comment": "single quoted string",
+					"end": "(')|(\\n)",
+					"endCaptures": {
+						"1": {
+							"name": "punctuation.definition.string.end.owl"
+						},
+						"2": {
+							"name": "invalid.illegal.unclosed-string.owl"
+						}
+					},
+					"name": "string.quoted.single.single-line.owl",
+					"patterns": [
+						{
+							"include": "#constant_placeholder"
+						},
+						{
+							"include": "#escaped_char"
+						}
+					]
+				}
+			]
+		},
+		"strings": {
+			"patterns": [
+				{
+					"include": "#string_quoted_double"
+				},
+				{
+					"include": "#string_quoted_single"
+				}
+			]
+		}
+	}
+}
